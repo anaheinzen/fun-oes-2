@@ -13,12 +13,12 @@ const botaoJogarNovamente = document.querySelector(".novamente.btn");
 
 let atual = 0;
 let perguntaAtual;
-let historiaFinal = ""; 
+let historiaFinal = "";
 
 function mostraPergunta() {
-    if(atual >= perguntas.length){
-mostraResultado();
-return;
+    if (atual >= perguntas.length) {
+        mostraResultado();
+        return;
 
     }
 
@@ -29,32 +29,33 @@ return;
 }
 
 function mostraAlternativas() {
-    for (const alternativa of perguntaAtual.alternativas){
+    for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
-        botaoAlternativas.addEventListener("click",() => respostaSelecionada(alternativa));
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
         caixaAlternativas.appendChild(botaoAlternativas);
     }
 }
 
-function respostaSelecionada(opcaoSeleionada){
-    const afirmacoes = aleatorio (opcaoSeleionada.afirmacao);
+function respostaSelecionada(opcaoSeleionada) {
+    const afirmacoes = aleatorio(opcaoSeleionada.afirmacao);
     historiaFinal += afirmacoes + " ";
-    atual++;                   
+    atual++;
     mostraPergunta();
 }
 
-function mostraResultado(){
+function mostraResultado() {
     caixaPerguntas.textContent = "Obrigado pela participação!";
     textoResultado.textContent = historiaFinal;
     caixaAlternativas.textContent = "";
     botaoJogarNovamente.addEventListener("click", botaoJogarNovamente);
 }
 
-function botaoJogarNovamente(){
+function botaoJogarNovamente() {
     atual = 0;
-historiaFinal = "";
-mostraPergunta();
+    historiaFinal = "";
+    caixaResultado.classList.remove("mostrar");
+    mostraPergunta();
 }
 
 mostraPergunta();
